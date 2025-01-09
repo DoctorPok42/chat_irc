@@ -1,0 +1,36 @@
+{
+    "name": "whatsup_server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node build/main.js",
+        "build": "node build.js"
+    },
+    "keywords": [],
+    "dependencies": {
+        "@tsed/socketio": "^7.64.0",
+        "@types/node": "^18.7.14",
+        "@types/socket.io": "^3.0.2",
+        "bcrypt": "^5.1.1",
+        "chalk": "^4.1.2",
+        "cls": "^0.1.5",
+        "cookie": "^0.7.0",
+        "cross-spawn": "^7.0.5",
+        "crypto": "^1.0.1",
+        "dotenv": "^16.0.2",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^6.13.5",
+        "node-cron": "^3.0.3",
+        "socket.io": "^4.7.5",
+        "socket.io-client": "^4.7.4",
+        "twilio": "^5.0.0",
+        "url-metadata": "^3.5.6"
+    },
+    "devDependencies": {
+        "@types/bcrypt": "^5.0.2",
+        "@types/jsonwebtoken": "^9.0.5",
+        "@types/node-cron": "^3.0.11",
+        "typescript": "^4.8.2"
+    }
+}
