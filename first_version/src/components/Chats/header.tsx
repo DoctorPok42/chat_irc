@@ -47,7 +47,9 @@ const HeaderChats = ({
             autoFocus
           />
         ) : (
-          <h2 onClick={() => setIsEdit(true)}>{conversationName}</h2>
+            <button className={styles.editButton} onClick={() => setIsEdit(true)}>
+              <h2>{conversationName}</h2>
+            </button>
         )}
       </div>
 
