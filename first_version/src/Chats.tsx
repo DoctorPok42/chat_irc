@@ -78,6 +78,9 @@ function App({ id }: { id: string }) {
         getConversations()
         getAllMessages()
         setStatus("Success")
+        if (action.split(" ")[0].split("/")[1] === "delete" || action.split(" ")[0].split("/")[1] === "archive") {
+          window.location.href = "/chats"
+        }
         if (action.split(" ")[0].split("/")[1] === "list" || action.split(" ")[0].split("/")[1] === "users") {
           setShowList(data.data)
           setActiveList(true)

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faThumbTack } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,6 +10,7 @@ interface HeaderChatsProps {
   conversationName: string;
   setIsSearchOpen?: (e: boolean) => void;
   setSearchState: (e: "message" | "user") => void;
+  setEdit: (newName: string) => void;
 }
 
 const HeaderChats = ({
@@ -18,7 +19,16 @@ const HeaderChats = ({
   conversationName,
   setIsSearchOpen,
   setSearchState,
+  setEdit,
 }: HeaderChatsProps) => {
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [newName, setNewName] = useState<string>(conversationName);
+
+  const onEdit = () => {
+    setIsEdit(false);
+    setEdit(newName);
+  }
+
   const handleSearchMessage = () => {
     setSearchState('message');
     setIsSearchOpen && setIsSearchOpen(true);
@@ -27,7 +37,20 @@ const HeaderChats = ({
   return (
     <div className={styles.header} onContextMenu={(e) => e.preventDefault()}>
       <div className={styles.title}>
-        <h2>{conversationName}</h2>
+        {isEdit ? (
+          <input
+            type="text"
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            onBlur={onEdit}
+            onKeyDown={(e) => e.key === 'Enter' && onEdit()}
+            autoFocus
+          />
+        ) : (
+            <button className={styles.editButton} onClick={() => setIsEdit(true)}>
+              <h2>{conversationName}</h2>
+            </button>
+        )}
       </div>
 
       <div className={styles.headerActions}>

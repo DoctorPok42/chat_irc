@@ -307,6 +307,17 @@ const Chats = ({
     })
   }
 
+  const onChangeName = (newName: string) => {
+    emitEvent("rename", { token, conversationId: id, newName }, (data: any) => {
+      setConversation(conversations.map(e => {
+        if (e._id === id) {
+          e.name = newName
+        }
+        return e
+      }))
+    })
+  }
+
   useEffect(() => {
     setAllMessages(messages)
 
@@ -376,6 +387,7 @@ const Chats = ({
             conversationName={conversationName}
             setIsSearchOpen={setIsSearchOpen}
             setSearchState={setSearchState}
+            setEdit={onChangeName}
           />
 
           <div className={styles.Chats_messages} onScroll={handleScroll} onLoad={() => {
