@@ -74,7 +74,7 @@ const getConversations = async (
   conversationsWithNames = (await Promise.all(
     conversationsWithNames.map(async (conv: Conversations) => {
       const messagesConversation = await mongoose.connection.db
-        .collection(`conversation_${conv._id}`)
+        .collection(`channel-${conv._id}`)
         .find()
         .toArray();
       if (!messagesConversation) return conv;

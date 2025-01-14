@@ -13,6 +13,9 @@
     position: relative;
     width: auto;
     height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     p {
       margin: 0;

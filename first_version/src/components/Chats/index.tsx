@@ -8,7 +8,6 @@ import formatDate from '../../tools/formatDate';
 import ChatsMessage from '../ChatsMessage';
 import { socket } from '../../index';
 import ContextMenu from '../ContextMenu';
-import { useCopyToClipboard } from '@uidotdev/usehooks';
 // import { cryptMessage } from '../../tools/cryptMessage';
 import downloadFile from '../../tools/downloadFile';
 import ContextMenuFunctions from '../ContextMenu/functions';
@@ -71,7 +70,6 @@ const Chats = ({
 
   const [messageIdHover, setMessageIdHover] = useState<string | null>(null)
   const [messageIdHoverContextMenu, setMessageIdHoverContextMenu] = useState<string | null>(null)
-  const [copyToClipboard] = useCopyToClipboard();
   const [inputBarMode, setInputBarMode] = useState<"chat" | "edit">("chat")
   const [inputBarValue, setInputBarValue] = useState<string>("")
   const [canHaveNewMessages, setCanHaveNewMessages] = useState<boolean>(true)
@@ -210,10 +208,10 @@ const Chats = ({
     if (files.length > 0) {
       files.map(e => {
         sendFile(e)
+        return e
       })
     } else {
       const isLink = message.match(/(https?:\/\/[^\s]+)/g);
-      console.log(id, message, isLink)
       emitEvent("sendMessage", { token, conversationId: id, content: message, files: null, isLink }, (data: any) => {
         setAllMessages([...allMessages, {
           ...data.data,
@@ -290,7 +288,7 @@ const Chats = ({
   const closeContextMenu = () => setContextMenu(initialContextMenu)
 
   const handleContextMenuAction = (action: string) => {
-    ContextMenuFunctions(action, token, id, allMessages, conversations, setConversation, setAllMessages, updateMessage, setInputBarMode, setInputBarValue, emitEvent, messageIdHoverContextMenu, copyToClipboard, setCanHaveNewMessages, userId, setIsForceUnread)
+    ContextMenuFunctions(action, token, id, allMessages, conversations, setConversation, setAllMessages, updateMessage, setInputBarMode, setInputBarValue, emitEvent, messageIdHoverContextMenu, setCanHaveNewMessages, userId, setIsForceUnread)
   }
 
   const handleAddReaction = (reaction: string) => {

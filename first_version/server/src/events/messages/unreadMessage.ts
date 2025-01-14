@@ -16,7 +16,7 @@ const unreadMessage = async (
     return { status: "error", messages: "Author not found.", data: null };
 
   await mongoose.connection.db
-    .collection(`conversation_${conversationId}`)
+    .collection(`channel-${conversationId}`)
     .updateMany(
       { _id: { $gte: messageId } },
       { $pull: { viewedBy: decoded.id } }

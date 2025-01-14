@@ -1,4 +1,3 @@
-import React from 'react';
 import ContentFileMessage from './content_file';
 import ContentMessage from './content';
 import FooterMessage from './footer';
@@ -19,6 +18,7 @@ interface MessageProps {
     }
     reactions?: { value: string, usersId: string[] }[]
     isTemp?: boolean
+    type?: "client" | "server"
   }
   isGroup: boolean
   allMessages: any[]

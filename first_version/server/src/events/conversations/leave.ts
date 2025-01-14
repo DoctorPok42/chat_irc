@@ -39,9 +39,8 @@ const leave = async (
 
   if (conversation.membersId.length <= 2) {
     await conversation.deleteOne();
-    mongoose.connection.db.dropCollection(`conversation_${conversationId}`);
-  }
-  else await conversation.save();
+    mongoose.connection.db.dropCollection(`channel-${conversationId}`);
+  } else await conversation.save();
 
   return { status: "success", message: "User left conversation." };
 };

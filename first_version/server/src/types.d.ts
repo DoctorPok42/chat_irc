@@ -77,6 +77,7 @@ export interface Message extends mongoose.Document {
       }[]
     | [];
   viewedBy: string[];
+  type?: "client" | "server";
 }
 
 export interface PrivateKey extends mongoose.Document {

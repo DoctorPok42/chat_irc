@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import formatDate from '../../tools/formatDate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHashtag, faShield, faShieldHeart } from '@fortawesome/free-solid-svg-icons';
+import { faShieldHeart } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './style.module.scss';
 

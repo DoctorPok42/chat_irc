@@ -17,7 +17,7 @@ const editMessage = async (
 
   // find and update the message
   const messageToEdit = await mongoose.connection.db
-    .collection(`conversation_${conversationId}`)
+    .collection(`channel-${conversationId}`)
     .findOne({ _id: realId });
   if (!messageToEdit) return { status: "error", message: "Message not found." };
 
@@ -25,7 +25,7 @@ const editMessage = async (
     return { status: "error", message: "You can't edit this message." };
 
   await mongoose.connection.db
-    .collection(`conversation_${conversationId}`)
+    .collection(`channel-${conversationId}`)
     .updateOne({ _id: realId }, { $set: { content: content, edited: true } });
 
   return { status: "success", message: "Message edited." };

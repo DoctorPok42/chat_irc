@@ -19,6 +19,7 @@ interface ChatsMessageProps {
     reactions?: { value: string, usersId: string[] }[]
     isTemp?: boolean
     viewedBy: string[]
+    type?: "client" | "server"
   }
   isGroup: boolean
   allMessages: any[]
@@ -59,6 +60,21 @@ const ChatsMessage = ({
     const fileBuffer = Buffer.from(message.content, "base64");
     const file = new File([fileBuffer], message.options.data.name, { type: message.options.data.type });
     imagePreview = URL.createObjectURL(file);
+  }
+
+  // Server message
+  if (message.type?.includes("server")) {
+    return (
+      <h6 style={{
+        color: "var(--blue)",
+        fontSize: "0.8em",
+        fontWeight: 1000,
+        margin: "0.5em 0",
+        textAlign: "center",
+      }}>
+        {message.content}
+      </h6>
+    );
   }
 
   return (

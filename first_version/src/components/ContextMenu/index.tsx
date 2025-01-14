@@ -92,7 +92,10 @@ const ContextMenu = ({
     return { x, y }
   }
 
-  const canEdit = message.authorId === userId && !message.options.isFile;
+  let canEdit = false;
+  if (message?.authorId) {
+    canEdit = message.authorId === userId && !message.options.isFile;
+  }
 
   const menuButtons = [
     ...canEdit ? [{ name: "Edit", value: "edit", icon: faPen }] : [],

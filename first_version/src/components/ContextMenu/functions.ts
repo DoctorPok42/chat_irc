@@ -11,22 +11,37 @@ const ContextMenuFunctions = (
   setInputBarValue: (arg: string) => void,
   emitEvent: any,
   messageIdHoverContextMenu: string | null,
-  copyToClipboard: any,
   setCanHaveNewMessages: (arg: boolean) => void,
   authorId: string,
   setIsForceUnread: (arg: boolean) => void
 ) => {
   switch (action) {
     case "copy":
-      copyToClipboard(
-        allMessages.find(
-          (e: { _id: string }) => e._id === messageIdHoverContextMenu
-        )?.content
-      );
+      const messageToCopy = allMessages.find(
+        (e: { _id: string }) => e._id === messageIdHoverContextMenu
+      )?.content;
+
+      if (messageToCopy) {
+        const el = document.createElement("textarea");
+        el.value = messageToCopy;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+      }
       break;
 
     case "clink":
-      copyToClipboard(window.location.href + `/${messageIdHoverContextMenu}`);
+      const linkToCopy = window.location.href + `/${messageIdHoverContextMenu}`;
+
+      if (linkToCopy) {
+        const el = document.createElement("textarea");
+        el.value = linkToCopy;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+      }
       break;
 
     case "edit":
