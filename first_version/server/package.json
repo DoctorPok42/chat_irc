@@ -9,6 +9,7 @@
     },
     "keywords": [],
     "dependencies": {
+        "@socket.io/cluster-adapter": "^0.2.2",
         "@tsed/socketio": "^7.64.0",
         "@types/node": "^18.7.14",
         "@types/socket.io": "^3.0.2",

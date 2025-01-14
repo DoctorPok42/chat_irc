@@ -74,7 +74,7 @@ const conversationsChoose = async (
 
     // Create the collection for the conversation's messages
     const responses = await mongoose.connection.db.createCollection(
-      `conversation_${response._id}`
+      `channel-${response._id}`
     );
     if (!responses)
       return { status: "error", message: "An error occurred.", data: null };

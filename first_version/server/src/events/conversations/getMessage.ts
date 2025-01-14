@@ -12,14 +12,14 @@ const getMessage = async ({
   // Get the message from the conversation
   const realMessageId = new mongoose.Types.ObjectId(messageId);
   let message = (await mongoose.connection.db
-    .collection(`conversation_${conversationId}`)
+    .collection(`channel-${conversationId}`)
     .findOne({ _id: realMessageId })) as any;
   if (!message)
     return { status: "error", message: "Message not found.", data: null };
 
   // load just 10 messages before the message with the given id
   let beforeMessages = (await mongoose.connection.db
-    .collection(`conversation_${conversationId}`)
+    .collection(`channel-${conversationId}`)
     .find({ date: { $lt: message.date } })
     .limit(10)
     .toArray()) as any;
@@ -28,7 +28,7 @@ const getMessage = async ({
 
   // load every message after the message with the given id
   let messages = (await mongoose.connection.db
-    .collection(`conversation_${conversationId}`)
+    .collection(`channel-${conversationId}`)
     .find({ date: { $gt: message.date } })
     .toArray()) as any;
   if (!messages)

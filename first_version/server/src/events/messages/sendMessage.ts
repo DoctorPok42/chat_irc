@@ -194,7 +194,7 @@ const sendMessage = async (
         img: author.username,
         options: message.options,
         type: files ? "file" : "text",
-      } as Message & User & { status: string; type: string });
+      } as Message & User & { status: string; type: "file" | "text" });
     })
   );
 

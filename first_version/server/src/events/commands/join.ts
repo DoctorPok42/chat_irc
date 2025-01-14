@@ -1,6 +1,8 @@
+import mongoose from "mongoose";
 import ConversationsModel from "../../schemas/conversations";
 import UserModel from "../../schemas/users";
-import { DecodedToken } from "../../types";
+import { DecodedToken, Message, User } from "../../types";
+import { io } from "../../main";
 
 const join = async (
   { args }: { args: string },
@@ -27,6 +29,39 @@ const join = async (
 
   const channelId = channel._id;
   user.conversationsId.push({ conversationId: channelId, lastMessageSeen: "" });
+
+  const welcomeMessage = ({
+    content: `${user.username} joined the channel!`,
+    authorId: "server",
+    date: new Date(),
+    type: "server",
+  } as unknown) as Message;
+
+  const request = await mongoose.connection.db
+    .collection(`channel-${channelId.toString()}`)
+    .insertOne(welcomeMessage);
+  if (!request)
+    return { status: "error", message: "Error joining the channel." };
+
+  // send the welcome message to all members
+  await channel.membersId.map(async (memberId: string) => {
+    const user = (await UserModel.findOne({ _id: memberId })) as User;
+    if (!user.options.online) return;
+    if (user._id === decoded.id) return;
+
+    io.to(user.socketId).emit("message", {
+      status: "success",
+      conversationsId: channelId,
+      _id: welcomeMessage._id,
+      content: welcomeMessage.content,
+      date: welcomeMessage.date,
+      authorId: welcomeMessage.authorId,
+      phone: user.phone,
+      img: user.username,
+      options: welcomeMessage.options,
+      type: "server",
+    } as Message & User & { status: string });
+  });
 
   await channel.save();
   await user.save();

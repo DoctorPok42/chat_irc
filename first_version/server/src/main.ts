@@ -3,21 +3,36 @@ import { Server } from "socket.io";
 import { readdirSync } from "fs";
 import { join } from "path";
 import { config } from "dotenv";
-import { Events, User } from "./types";
+import { Events } from "./types";
 import { checkCollections, color } from "./functions";
-import UserModel from "./schemas/users";
 import startComunication from "./socket";
-import cron from "node-cron";
+import { createAdapter, setupPrimary } from "@socket.io/cluster-adapter";
+const { availableParallelism } = require("node:os");
+const cluster = require("node:cluster");
 
 config();
 
 let events = {} as Events;
+
+// if (cluster.isPrimary) {
+//   const numCPUs = availableParallelism();
+
+//   for (let i = 0; i < numCPUs; i++) {
+//     cluster.fork({
+//       PORT: 3000 + i,
+//     });
+//   }
+
+//   setupPrimary();
+// }
 
 const server = createServer();
 const io = new Server(server, {
   cors: {
     origin: process.env.SERVER_URL,
   },
+  connectionStateRecovery: {},
+  // adapter: createAdapter(),
 });
 
 const initServer = async () => {

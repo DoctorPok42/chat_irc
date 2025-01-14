@@ -28,7 +28,7 @@ const getMessages = async (
 }> => {
   // Get the last 20 messages from the conversation
   const messages = (await mongoose.connection.db
-    .collection(`conversation_${conversationId}`)
+    .collection(`channel-${conversationId}`)
     .find()
     .sort({ date: -1 })
     .limit(messageLoaded + 20)
@@ -67,10 +67,7 @@ const getMessages = async (
   if (!privateKey)
     return { status: "error", message: "Private key not found.", data: null };
 
-  const decryptedMessages = decryptMessages(
-    messages,
-    privateKey
-  ).reverse();
+  const decryptedMessages = decryptMessages(messages, privateKey).reverse();
   if (!decryptedMessages)
     return {
       status: "error",
