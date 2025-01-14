@@ -92,7 +92,7 @@ const ContextMenu = ({
     return { x, y }
   }
 
-  var canEdit = false;
+  let canEdit = false;
   if (message?.authorId) {
     canEdit = message.authorId === userId && !message.options.isFile;
   }

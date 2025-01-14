@@ -6,9 +6,9 @@ import { config } from "dotenv";
 import { Events } from "./types";
 import { checkCollections, color } from "./functions";
 import startComunication from "./socket";
-import { createAdapter, setupPrimary } from "@socket.io/cluster-adapter";
-const { availableParallelism } = require("node:os");
-const cluster = require("node:cluster");
+// import { createAdapter, setupPrimary } from "@socket.io/cluster-adapter";
+// const { availableParallelism } = require("node:os");
+// const cluster = require("node:cluster");
 
 config();
 
