@@ -87,7 +87,7 @@ io.on('connection', (socket: Socket) => {
         try {
             const { channel, username } = data;
             const user = await User.findOne({username});
-            if (user!= null && user.channels.includes(channel)) {
+            if (user?.channels.includes(channel)) {
                 console.log('User already in channel');
                 return;
             }
