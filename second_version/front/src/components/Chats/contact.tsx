@@ -78,19 +78,6 @@ const Contact = ({
 
   return (
     <div className={styles.Contact_container} onContextMenu={(e) => e.preventDefault()}>
-      {/* <div className={styles.arrow} style={{
-        transform: showContact ? 'rotate(0)' : 'rotate(180deg)',
-        opacity: (!isLoading && id) ? 1 : 0,
-      }}>
-        <FontAwesomeIcon
-          icon={faCircleChevronLeft}
-          onClick={() => setShowContact(!showContact)}
-          color='#7d7f92'
-          width={25}
-          height={25}
-        />
-      </div> */}
-
       <SearchBar onSearch={onSearch} showContact={showContact} setShowContact={setShowContact} clearSearch={search === ''} />
 
       <div className={styles.userSearched} style={{
@@ -107,22 +94,52 @@ const Contact = ({
         ))}
       </div>
 
-      <div className={styles.conversations}>
-        {(!isLoading && conversations) ? conversations.map((conversation, index) => (
-          <ConversationCard key={index + conversation._id} id={id} conversation={conversation} onClick={() => window.location.href = `/chats/${conversation._id}`} showContact={showContact} />
-        )) :
-          Array(7).fill(0).map((_, index) => (
-            <Skeleton
-              key={index + "skeleton"}
-              variant="rectangular"
-              width="22em"
-              height="100px"
-              animation="wave"
-              style={{
-                borderRadius: '22px',
-              }}
-            />
-          ))}
+      <div className={styles.conv_container}>
+        <div className={styles.conversations}>
+          <div className={styles.conv_title}>
+            Channels
+          </div>
+
+          {(!isLoading && conversations) ? conversations.map((conversation, index) => (
+            conversation.conversationType === "group" &&
+            <ConversationCard key={index + conversation._id} id={id} conversation={conversation} onClick={() => window.location.href = `/chats/${conversation._id}`} showContact={showContact} />
+          )) :
+            Array(7).fill(0).map((_, index) => (
+              <Skeleton
+                key={index + "skeleton"}
+                variant="rectangular"
+                width="22em"
+                height="100px"
+                animation="wave"
+                style={{
+                  borderRadius: '22px',
+                }}
+              />
+            ))}
+        </div>
+
+        <div className={styles.conversations}>
+          <div className={styles.conv_title}>
+            Private Chats
+          </div>
+
+          {(!isLoading && conversations) ? conversations.map((conversation, index) => (
+            conversation.conversationType === "private" &&
+            <ConversationCard key={index + conversation._id} id={id} conversation={conversation} onClick={() => window.location.href = `/chats/${conversation._id}`} showContact={showContact} />
+          )) :
+            Array(7).fill(0).map((_, index) => (
+              <Skeleton
+                key={index + "skeleton"}
+                variant="rectangular"
+                width="22em"
+                height="100px"
+                animation="wave"
+                style={{
+                  borderRadius: '22px',
+                }}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );

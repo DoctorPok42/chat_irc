@@ -24,13 +24,14 @@ function App({ id }: { id: Readonly<string> }) {
       membersId: ["65cb26a5f01f97be4ea965d2", "65f01f7e7f40b87fb7a722fc"],
       createdAt: "2024-05-14T07:00:22.477Z",
       updatedAt: "2024-05-14T07:00:22.477Z",
+      lastMessage: "Test",
       lastMessageAuthorId: "65cb26a5f01f97be4ea965d2",
       lastMessageId: "65f16e7a56060bede462581f",
       lastMessageDate: "2024-05-14T07:00:22.477Z",
     },
     {
       _id: "65f16e7a56060bedea62581f",
-      conversationType: "group",
+      conversationType: "private",
       name: "Test 2",
       links: [
         {
@@ -44,6 +45,7 @@ function App({ id }: { id: Readonly<string> }) {
       membersId: ["65cb26a5f01f97be4ea965d2", "65f01f7e7f40b87fb7a722fc"],
       createdAt: "2024-05-14T07:00:22.477Z",
       updatedAt: "2024-05-14T07:00:22.477Z",
+      lastMessage: "Babebibobu",
       lastMessageAuthorId: "65cb26a5f01f97be4ea965d2",
       lastMessageId: "65f16e7a56060bede462581f",
       lastMessageDate: "2024-05-15T07:00:22.477Z",
@@ -64,11 +66,16 @@ function App({ id }: { id: Readonly<string> }) {
       membersId: ["65cb26a5f01f97be4ea965d2", "65f01f7e7f40b87fb7a722fc"],
       createdAt: "2024-05-14T07:00:22.477Z",
       updatedAt: "2024-05-14T07:00:22.477Z",
+      lastMessage: "Test 2",
       lastMessageAuthorId: "65cb26a5f01f97be4ea965d2",
       lastMessageId: "65f16e7a56060bede462581f",
       lastMessageDate: "2024-05-13T07:00:22.477Z",
     },
   ])
+
+  if (!conversations.map((conversation: any) => conversation._id).includes(id) && id)
+    window.location.href = "/chats"
+
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [allMessages, setAllMessages] = useState<any>(null)
   const [firstTime, setFirstTime] = useState<boolean>(true)
@@ -154,7 +161,7 @@ function App({ id }: { id: Readonly<string> }) {
     <main ref={mainRef} className="container">
       <Chats
         token={token}
-        isConversation={!id}
+        isConversation={id ? true : false}
         id={id}
         userId={userId || ""}
         isInfoOpen={isInfoOpen}

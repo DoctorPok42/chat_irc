@@ -59,8 +59,7 @@ const Chats = ({
 
   const [messageLoaded, setMessageLoaded] = useState<number>(0)
   const [userTyping, setUserTyping] = useState<string>("")
-  const [setSearchState] = useState<"message" | "user">("user")
-  const [setContextMenu] = useState(initialContextMenu)
+  const [contextMenu, setContextMenu] = useState(initialContextMenu)
   const [showContact, setShowContact] = useState<boolean>(true)
 
   const [messageIdHover, setMessageIdHover] = useState<string | null>(null)

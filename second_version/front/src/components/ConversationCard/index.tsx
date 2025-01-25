@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 import formatDate from '../../tools/formatDate';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShieldHeart } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './style.module.scss';
 
@@ -35,7 +33,6 @@ const ConversationCard = ({
     }}>
       <div className={styles.img_Conv}>
         <img src={`https://api.dicebear.com/8.x/avataaars/svg?seed=${conversation.name.toLowerCase()}&radius=50&backgroundColor=65c9ff,b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf&randomizeIds=true`} alt="ConversationCardIcon" width={60} height={60} />
-        <p>{conversation.conversationType === "private" && <FontAwesomeIcon id='test' icon={faShieldHeart} size="1x" color="#7d7f92" />}</p>
       </div>
       <div className={styles.userInfo}>
         {showContact && <div className={styles.title}>

@@ -46,11 +46,12 @@ const InputBar = ({
   const [indexEmoji, setIndexEmoji] = useState<number>(0);
   const [emojiPickerOpen, setEmojiPickerOpen] = useState<boolean>(false);
   const [emojiClickAway, setEmojiClickAway] = useState<boolean>(false);
+  const [keyEnter, setKeyEnter] = useState<boolean>(false);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (mode === "chat") onTyping();
+    if (keyEnter) return;
     else if (mode === "edit") {
       if (e.target.value.trim() === '') {
         setMode("chat");
@@ -83,6 +84,7 @@ const InputBar = ({
   }, [mode]);
 
   const handleSend = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter') setKeyEnter(!keyEnter);
     if (e.key === 'Enter' && !e.shiftKey) {
       if (e.currentTarget.value.trim() === '' && files.length === 0) return;
       setFiles([]);
@@ -171,12 +173,11 @@ const InputBar = ({
             <EmojiPicker
               open={emojiPickerOpen}
               onEmojiClick={(emoji) => addReactionToInput(emoji.emoji)}
-              theme={"auto" as Theme}
+              theme={"light" as Theme}
               emojiStyle={emojiStyleChoose}
               style={{
                 backgroundColor: "#fff",
               }}
-              
               searchPlaceHolder='Find the perfect emoji...'
               lazyLoadEmojis
             />
