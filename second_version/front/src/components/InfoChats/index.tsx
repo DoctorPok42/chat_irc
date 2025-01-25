@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faClose, faSignOutAlt, faUserPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faClose, faSignOutAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import ButtonChat from './button';
 import PartChat from './part';
 import emitEvent from '../../tools/webSocketHandler';

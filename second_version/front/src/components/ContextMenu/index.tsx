@@ -8,15 +8,13 @@ import {
   faLink,
   faPen,
   faRotateLeft,
-  faThumbTack,
   faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Zoom } from '@mui/material';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
-import { Emoji, EmojiStyle } from 'emoji-picker-react';
-import Picker from 'emoji-picker-react';
+import Picker, { Emoji, EmojiStyle } from 'emoji-picker-react';
 
 import styles from './style.module.scss';
 

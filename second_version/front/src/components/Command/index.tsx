@@ -55,7 +55,7 @@ const Command = ({
   ]
 
   const handleFilter = (value: string) => {
-    if (value[0] !== '/') return [];
+    if (!value.startsWith('/')) return [];
     return commandList.filter(command => command.name.includes(value)) &&
       commandList.filter(command => command.name.includes(value.split(' ')[0]))
   }
@@ -102,7 +102,7 @@ const Command = ({
             <ul>
               {!activeList ? handleFilter(inputValue).map((command, index) => (
                 <li
-                  key={index}
+                  key={index + command.name}
                   className={styles.item}
                   onClick={() => setInputValue(command.name.split(' ')[0] + ' ')}
                   style={{
@@ -114,7 +114,7 @@ const Command = ({
                 </li>
               )) : showList.length > 0 ? (
                 showList.map((item, index) => (
-                  <li key={index} className={styles.item}>
+                  <li key={index + showList.length} className={styles.item}>
                     <span>{item.name || item.username}</span>
                   </li>
                 ))

@@ -74,7 +74,6 @@
 
       .conversations {
         width: 100%;
-        // height: 100%;
         background: none;
         display: flex;
         flex-direction: column;
@@ -226,7 +225,6 @@
     .Chats_messages {
       width: calc(100% - 2em);
       max-height: calc(100% - 11.5em);
-      // background-color: red;
       padding: 1em;
       overflow-y: auto;
 

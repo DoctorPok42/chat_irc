@@ -4,8 +4,6 @@ import styles from './style.module.scss';
 
 interface LinksPartProps {
   content: string
-  authorId: string
-  date: string
   title: string
   onClick: () => void
 }

@@ -36,9 +36,11 @@ const PartChat = ({
   elements = elements.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   elements = isLarge ? elements : elements.slice(0, 4)
 
+  const show = showMinimized ? '2em' : value === "pictures" ? '9em' : '15em'
+
   return (
     <div className={styles.PartChat_container} style={{
-      height: isLarge ? '80%' : showMinimized ? '2em' : value === "pictures" ? '9em' : '15em',
+      height: isLarge ? '80%' : show,
     }}>
       <div className={styles.headerPart}>
         <div className={styles.title}>{name} <span>{elementLength}</span></div>

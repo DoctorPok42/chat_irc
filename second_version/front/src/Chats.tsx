@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import Cookies from "universal-cookie";
 import getToken from "./tools/getToken";
-import { Chats, Command, SideBar } from "./components";
+import { Chats, Command } from "./components";
 import emitEvent from "./tools/webSocketHandler";
 
-function App({ id }: { id: string }) {
+function App({ id }: { id: Readonly<string> }) {
   const [command, setCommand] = useState<boolean>(false);
   const [isInfoOpen, setIsInfoOpen] = useState<boolean>(false)
   const [conversations, setConversations] = useState<any>([
@@ -80,10 +80,6 @@ function App({ id }: { id: string }) {
 
   const { token, phone, userId } = getToken(new Cookies());
 
-  // if (!token) {
-  //   window.location.href = "/login";
-  // }
-
   const getConversations = async () => {
     emitEvent("getConversations", { token }, (data: any) => {
       const conversations = data.data.map((conversation: any) => {
@@ -156,13 +152,11 @@ function App({ id }: { id: string }) {
 
   return (
     <main ref={mainRef} className="container">
-      {/* <SideBar path="/chats" phone={phone} /> */}
-
       <Chats
         token={token}
-        isConversation={id ? true : false}
-        id={id && id}
-        userId={userId ? userId : ""}
+        isConversation={!id}
+        id={id}
+        userId={userId || ""}
         isInfoOpen={isInfoOpen}
         setIsInfoOpen={setIsInfoOpen}
         conversations={conversations}
@@ -171,7 +165,7 @@ function App({ id }: { id: string }) {
         isSearchOpen={false}
         setIsSearchOpen={() => {}}
         isLoading={isLoading}
-        phone={phone ? phone : ""}
+        phone={phone || ""}
         messages={
           allMessages?.[id] ? allMessages[id] : []
         }

@@ -4,8 +4,6 @@ import emitEvent from '../../tools/webSocketHandler';
 import UserCard from '../UserCard';
 import ConversationCard from '../ConversationCard';
 import { Skeleton } from '@mui/material';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './style.module.scss';
 

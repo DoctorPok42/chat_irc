@@ -11,7 +11,7 @@ const emitEvent = (
         callback && callback(data);
       } else {
         if (callback && callback.length === 2) {
-          callback && callback(data, data.message);
+          callback(data, data.message);
         }
         console.error(data.message);
       }

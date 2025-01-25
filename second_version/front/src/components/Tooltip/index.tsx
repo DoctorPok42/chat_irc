@@ -2,8 +2,6 @@ import React from 'react';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
 
-import styles from './style.module.scss';
-
 interface TooltipComponentProps {
   position?: "top" | "bottom" | "left" | "right"
   title?: string
@@ -38,7 +36,7 @@ const TooltipComponent = ({
   style,
 }: TooltipComponentProps) => {
   return (
-    <div className={styles.TooltipComponent_container}>
+    <div>
       <NameTooltip
         title={title}
         placement={position}

@@ -18,11 +18,11 @@ export default function Login() {
   }, [token]);
 
   useEffect(() => {
-    if (loginStep === "code") return;
+      if (loginStep === "code") return;
       const phoneRegex = new RegExp(/^(\d{2}\s){4}\d{2}$/);
 
       const phoneValue = document.querySelector("input[name=phone]") as HTMLInputElement;
-      phoneValue.value = phoneValue.value.replace(/[^0-9]/g, "").replace(/(\d{2})(?=\d)/g, "$1 ");
+      phoneValue.value = phoneValue.value.replace(/\D/g, "").replace(/(\d{2})(?=\d)/g, "$1 ");
 
       if (phoneRegex.test(phoneValue.value || phone)) {
         if (loginType === "signup" && username.length < 3) return setIsValide(false);
@@ -84,17 +84,17 @@ export default function Login() {
           </div>
 
           <div className="loginBox">
-            <form>
+            <form id="loginForm">
 
               {loginStep === "phone" ?
                 <>
                   <div className="inputBox">
-                    <label>Phone number <span>*</span></label>
+                    <label form="loginForm">Phone number <span>*</span></label>
                     <input type="text" name="phone" required onChange={(e) => setPhone(e.target.value)} />
                   </div>
 
                   {loginType === "signup" && <div className="inputBox">
-                    <label>Username <span>*</span></label>
+                    <label form="loginForm">Username <span>*</span></label>
                     <input type="text" name="username" required onChange={(e) => setUsername(e.target.value)} />
                   </div>}
 

@@ -59,16 +59,16 @@ const Chats = ({
 
   const [messageLoaded, setMessageLoaded] = useState<number>(0)
   const [userTyping, setUserTyping] = useState<string>("")
-  const [searchState, setSearchState] = useState<"message" | "user">("user")
-  const [contextMenu, setContextMenu] = useState(initialContextMenu)
+  const [setSearchState] = useState<"message" | "user">("user")
+  const [setContextMenu] = useState(initialContextMenu)
   const [showContact, setShowContact] = useState<boolean>(true)
 
   const [messageIdHover, setMessageIdHover] = useState<string | null>(null)
   const [messageIdHoverContextMenu, setMessageIdHoverContextMenu] = useState<string | null>(null)
   const [inputBarMode, setInputBarMode] = useState<"chat" | "edit">("chat")
-  const [inputBarValue, setInputBarValue] = useState<string>("")
+  const [inputBarValue] = useState<string>("")
   const [canHaveNewMessages, setCanHaveNewMessages] = useState<boolean>(true)
-  const [isForceUnread, setIsForceUnread] = useState<boolean>(false)
+  const [isForceUnread] = useState<boolean>(false)
   const [lastReaction, setLastReaction] = useState<{ value: string, authorId: string[] }[] | null>(null)
 
   const updateMessage = (changedMessages?: any) => setMessages(id, changedMessages || allMessages)
@@ -78,16 +78,6 @@ const Chats = ({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey) {
         switch (e.key) {
-          case "f":
-            e.preventDefault();
-            setIsSearchOpen && setIsSearchOpen(!isSearchOpen);
-            setSearchState("message");
-            break;
-          case "k":
-            e.preventDefault();
-            setIsSearchOpen && setIsSearchOpen(!isSearchOpen);
-            setSearchState("user");
-            break;
           case "b":
             e.preventDefault();
             setIsInfoOpen && setIsInfoOpen(!isInfoOpen);
@@ -194,10 +184,7 @@ const Chats = ({
 
     // Send files if there are some
     if (files.length > 0) {
-      files.map(e => {
-        sendFile(e)
-        return e
-      })
+      files.forEach(e => sendFile(e))
     } else {
       const isLink = message.match(/(https?:\/\/[^\s]+)/g);
       emitEvent("sendMessage", { token, conversationId: id, content: message, files: null, isLink }, (data: any) => {
@@ -328,7 +315,6 @@ const Chats = ({
             setIsInfoOpen={setIsInfoOpen}
             conversationName={conversationName}
             setIsSearchOpen={setIsSearchOpen}
-            setSearchState={setSearchState}
             setEdit={onChangeName}
           />
 

@@ -9,7 +9,6 @@ interface HeaderChatsProps {
   setIsInfoOpen: (value: boolean) => void;
   conversationName: string;
   setIsSearchOpen?: (e: boolean) => void;
-  setSearchState: (e: "message" | "user") => void;
   setEdit: (newName: string) => void;
 }
 
@@ -18,7 +17,6 @@ const HeaderChats = ({
   setIsInfoOpen,
   conversationName,
   setIsSearchOpen,
-  setSearchState,
   setEdit,
 }: HeaderChatsProps) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -29,10 +27,7 @@ const HeaderChats = ({
     setEdit(newName);
   }
 
-  const handleSearchMessage = () => {
-    setSearchState('message');
-    setIsSearchOpen && setIsSearchOpen(true);
-  }
+  const handleSearchMessage = () => setIsSearchOpen && setIsSearchOpen(true);
 
   return (
     <div className={styles.header} onContextMenu={(e) => e.preventDefault()}>
