@@ -7,7 +7,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isValide, setIsValide] = useState(false);
   const [loginType, setLoginType] = useState<"signin" | "signup">("signin");
-  const [verifCode, setVerifCode] = useState<string>("");
 
   const cookies = new Cookies();
   const token = cookies.get("token");
