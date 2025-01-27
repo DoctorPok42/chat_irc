@@ -1,0 +1,138 @@
+.Command_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(100, 100, 100, 0.3);
+  z-index: 100;
+  animation: fadeIn 0.5s;
+
+  .content {
+    background-color: var(--grey);
+    padding: 1em 1.3em;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 30em;
+    margin-top: 33vh;
+    animation: fadeIn2 0.3s;
+
+    .title {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 1em;
+      display: flex;
+      flex-direction: column;
+
+      p {
+        padding: 0.3em;
+        color: var(--white);
+        border-radius: 12px;
+        font-size: 1em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+        text-align: center;
+      }
+    }
+
+    .body {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+
+      .input {
+        padding: 0.5em;
+        border: 1.5px solid var(--light-grey);
+        background-color: var(--black);
+        border-radius: 12px;
+
+        input {
+          width: 100%;
+          border: none;
+          background-color: transparent;
+          font-size: 1.3em;
+          font-weight: bold;
+          color: var(--light-grey);
+          outline: none;
+        }
+      }
+
+      .list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        list-style-type: none;
+        max-height: 30vh;
+        overflow-y: auto;
+        margin: 0;
+        padding: 0;
+
+        ul {
+          padding: 0;
+          margin-left: 1em;
+          list-style: none;
+          cursor: pointer;
+        }
+
+        .item {
+          padding: 0.2em 0;
+          border-bottom: 1px solid var(--blue);
+
+          transition: var(--transition);
+          span {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: var(--blue);
+          }
+
+          p {
+            margin: 0.5em 0;
+            font-size: 1.1em;
+            color: var(--light-grey);
+          }
+        }
+
+        .item:last-child {
+          border-bottom: none;
+        }
+      }
+
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: var(--blue);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background-color: var(--black);
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn2 {
+  from {
+    transform: translateY(-2em);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
