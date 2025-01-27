@@ -62,7 +62,7 @@ export default function Login() {
               </div>
 
               <div className="inputBox">
-                <input type="button" value="Get my code" style={{
+                <input type="button" value={loginType === "signin" ? "Sign in" : "Sign up"} style={{
                   backgroundColor: isValide ? "var(--green)" : "var(--white-dark)",
                   cursor: isValide ? "pointer" : "not-allowed"
                 }} disabled={!isValide} onClick={handleSubmit} />
