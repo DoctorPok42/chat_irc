@@ -52,8 +52,6 @@ export default function Login() {
 
           <div className="loginBox">
             <form id="loginForm">
-
-
               <div className="inputBox">
                 <label form="loginForm">Username <span>*</span></label>
                 <input type="text" name="username" required onChange={(e) => setUsername(e.target.value)} />

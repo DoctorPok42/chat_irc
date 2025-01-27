@@ -1,0 +1,270 @@
+.InfoChats_container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  overflow: hidden;
+
+  .header {
+    width: calc(100% - 2em);
+    padding: 0 1em;
+    height: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+      font-size: 1.3em;
+      color: #ffffff;
+    }
+
+    .back {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2em;
+      height: 2em;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .back:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .buttons {
+    width: 90%;
+    height: 5em;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5em;
+
+    .ButtonChat_container {
+      width: 4em;
+      height: 4em;
+      border-radius: 22px;
+      background-color: #2e333d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .ButtonChat_container:hover {
+      filter: brightness(0.85);
+    }
+
+    .ButtonChat_container:active {
+      background-color: #1e222b;
+    }
+  }
+
+  .parts {
+    width: 100%;
+    height: calc(100vh - 12.5em);
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+
+    .PartChat_container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0 1em;
+      border-radius: 22px;
+      transition: var(--transition);
+
+      .headerPart {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .title {
+          font-size: 1.3em;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          margin: 0;
+
+          span {
+            margin: 0;
+            color: var(--light-grey);
+            font-size: 0.7em;
+            margin-left: 0.5em;
+            margin-top: 0.1em;
+          }
+        }
+
+        .seeAll {
+          font-size: 1em;
+          color: var(--light-grey);
+          cursor: pointer;
+        }
+
+        .seeAll:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .elementContainer,
+      .imagePartContainer {
+        width: 90%;
+        height: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 0.5em;
+
+        .element,
+        .imagePart {
+          margin-top: 0.7em;
+
+          .LinksPart_container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            animation: fadeIn 0.4s ease-in-out forwards;
+
+            .icon {
+              width: 3.3em;
+              height: 3em;
+              background-color: var(--white);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 12px;
+              overflow: hidden;
+
+              img {
+                width: 65%;
+                height: 65%;
+                object-fit: cover;
+              }
+            }
+
+            .links {
+              width: calc(100% - 3em);
+              height: 3em;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: center;
+              gap: 0.2em;
+              margin-left: 1em;
+              overflow: hidden;
+
+              .title,
+              .contentLink {
+                max-width: 100%;
+                font-size: 1.1em;
+                color: #ffffff;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                cursor: pointer;
+              }
+
+              .contentLink {
+                font-size: 0.8em;
+                color: var(--light-grey);
+              }
+
+              .title:hover {
+                text-decoration: underline;
+                color: var(--blue);
+              }
+            }
+          }
+
+          .FilePart_container {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            animation: fadeIn 0.4s ease-in-out forwards;
+
+            .icon {
+              padding: 1.2em;
+              border-radius: 18px;
+              background-color: #2e333d;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .file {
+              width: 75%;
+
+              h2 {
+                font-size: 1em;
+                font-weight: 300;
+                color: #e9eaeb;
+                cursor: pointer;
+                transition: var(--transition);
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                line-height: 1.3em;
+              }
+            }
+          }
+
+          .FilePart_container:hover {
+            .file {
+              h2 {
+                color: var(--blue);
+              }
+            }
+          }
+        }
+      }
+
+      .imagePartContainer {
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .imagePart {
+          width: calc(50% - 0.25em);
+
+          .ImagePart_container {
+            animation: fadeIn 0.4s ease-in-out forwards;
+
+            img {
+              width: 100%;
+              height: 50%;
+              border-radius: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(1em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
