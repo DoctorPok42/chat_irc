@@ -6,6 +6,16 @@ import User from './models/user';
 import Message from './models/message';
 import jwt from 'jsonwebtoken';
 import Channel from './models/channels';
+import re from './Events/register';
+import lo from './Events/login';
+import startSocket from './socket';
+import me from './Events/message';
+import je from './Events/join';
+import ni from './Events/nick';
+import li from './Events/listUsers';
+import de from './Events/delete';
+import cr from './Events/create';
+import le from './Events/leave';
 
 const JWT_SECRET = 'secret';
 
@@ -20,6 +30,20 @@ const io = new Server(server, {
     },
 });
 
+const events = {
+    register : re,
+    login : lo,
+    message: me,
+    join : je,
+    nick : ni,
+    list : li,
+    delete : de,
+    create : cr,
+    leave : le,
+};
+
+startSocket(io, events);
+/*
 io.on('connection', (socket: Socket) => {
     console.log('a user connected');
 
@@ -232,7 +256,7 @@ io.on('connection', (socket: Socket) => {
         console.log('user disconnected');
     });
 });
-
+*/
 server.listen(8000, () => {
     console.log(`Server running on port ${8000}`);
 });

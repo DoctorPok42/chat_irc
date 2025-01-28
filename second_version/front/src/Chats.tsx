@@ -134,11 +134,12 @@ function App({ id }: { id: Readonly<string> }) {
 
   const handleAction = (action: string) => {
     setStatus("")
-    emitEvent(action.split(" ")[0].split("/")[1], { token , args: action.split(" ").slice(1).toString().trim(), id }, (data: any, error: any) => {
+    emitEvent(action.split(" ")[0].split("/")[1], { token , args: action.split(" ").slice(1).toString().trim() }, (data: any, error: any) => {
       if (error) {
         setStatus(error)
         setShowList([])
       } else {
+        console.log(data)
         getConversations()
         getAllMessages()
         setStatus("Success")

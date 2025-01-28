@@ -22,7 +22,12 @@ export default function Login() {
 
   const handleSubmit = async () => {
     emitEvent(loginType === "signin" ? "login" : "register", { username, password }, (data: any) => {
-      setIsValide(false);
+      if (data.success){
+        cookies.set("token", data.token, { path: "/" });
+        window.location.href = "/chats";
+      }else{
+        alert(data.message);
+      }
     });
   };
 
