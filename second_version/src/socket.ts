@@ -1,13 +1,17 @@
 import { Server, Socket } from 'socket.io';
-import { Events } from './types';
 
-const startSocket = (io: Server, events : Events) => {
+const startSocket = (io: Server, events : any) => {
     io.on('connection', (socket: Socket) => {
         console.log('a user connected');
     
         Object.keys(events).forEach((event) => {
             socket.on(event, (data: any, callback: any) => {
-                events[event](data, callback);
+                console.log(`received ${event}`);
+                if (event == 'sendMessage') {
+                    events[event](data, callback, socket);
+                } else {
+                    events[event](data, callback);
+                }
             });
         });
 

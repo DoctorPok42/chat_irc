@@ -16,6 +16,7 @@ import li from './Events/listUsers';
 import de from './Events/delete';
 import cr from './Events/create';
 import le from './Events/leave';
+import veto from './Events/verifyToken';
 
 const JWT_SECRET = 'secret';
 
@@ -33,13 +34,14 @@ const io = new Server(server, {
 const events = {
     register : re,
     login : lo,
-    message: me,
+    sendMessage: me,
     join : je,
     nick : ni,
     list : li,
     delete : de,
     create : cr,
     leave : le,
+    verifyToken : veto,
 };
 
 startSocket(io, events);
