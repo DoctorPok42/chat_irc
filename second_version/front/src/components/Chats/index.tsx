@@ -122,6 +122,7 @@ const Chats = ({
   }
 
   socket.on("message", (data: any) => {
+    console.log(data)
     if (data.conversationsId === id) {
       setAllMessages([...allMessages, data])
       updateMessage([...allMessages, data])

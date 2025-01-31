@@ -20,6 +20,7 @@ import veto from './Events/verifyToken';
 import gech from './Events/getChannel';
 import getAllMess from './Events/getAllMessages';
 import getMess from './Events/getMessages';
+import priMess from './Events/privateMessage';
 
 const JWT_SECRET = 'secret';
 
@@ -48,6 +49,7 @@ const events = {
     getConversations : gech,
     getAllMessages : getAllMess,
     getMessages : getMess,
+    msg : priMess,
 };
 
 startSocket(io, events);
