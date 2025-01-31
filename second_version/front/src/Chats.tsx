@@ -8,73 +8,73 @@ function App({ id }: { id: Readonly<string> }) {
   const [command, setCommand] = useState<boolean>(false);
   const [isInfoOpen, setIsInfoOpen] = useState<boolean>(false)
   const [conversations, setConversations] = useState<any>([
-    {
-      _id: "65f16e7a56060bede462581f",
-      conversationType: "group",
-      name: "Test",
-      links: [
-        {
-          content: "https://doctorpok.io",
-          authorId: "65cb26a5f01f97be4ea965d2",
-          date: "2024-05-14T07:00:22.477Z",
-        }
-      ],
-      files: [],
-      pinnedMessages: [],
-      membersId: ["65cb26a5f01f97be4ea965d2", "65f01f7e7f40b87fb7a722fc"],
-      createdAt: "2024-05-14T07:00:22.477Z",
-      updatedAt: "2024-05-14T07:00:22.477Z",
-      lastMessage: "Test",
-      lastMessageAuthorId: "65cb26a5f01f97be4ea965d2",
-      lastMessageId: "65f16e7a56060bede462581f",
-      lastMessageDate: "2024-05-14T07:00:22.477Z",
-    },
-    {
-      _id: "65f16e7a56060bedea62581f",
-      conversationType: "private",
-      name: "Test 2",
-      links: [
-        {
-          content: "https://doctorpok.io",
-          authorId: "65cb26a5f01f97be4ea965d2",
-          date: "2024-05-14T07:00:22.477Z",
-        }
-      ],
-      files: [],
-      pinnedMessages: [],
-      membersId: ["65cb26a5f01f97be4ea965d2", "65f01f7e7f40b87fb7a722fc"],
-      createdAt: "2024-05-14T07:00:22.477Z",
-      updatedAt: "2024-05-14T07:00:22.477Z",
-      lastMessage: "Babebibobu",
-      lastMessageAuthorId: "65cb26a5f01f97be4ea965d2",
-      lastMessageId: "65f16e7a56060bede462581f",
-      lastMessageDate: "2024-05-15T07:00:22.477Z",
-    },
-    {
-      _id: "65f16e7a56060bedb462581f",
-      conversationType: "group",
-      name: "Test 3",
-      links: [
-        {
-          content: "https://doctorpok.io",
-          authorId: "65cb26a5f01f97be4ea965d2",
-          date: "2024-05-14T07:00:22.477Z",
-        }
-      ],
-      files: [],
-      pinnedMessages: [],
-      membersId: ["65cb26a5f01f97be4ea965d2", "65f01f7e7f40b87fb7a722fc"],
-      createdAt: "2024-05-14T07:00:22.477Z",
-      updatedAt: "2024-05-14T07:00:22.477Z",
-      lastMessage: "Test 2",
-      lastMessageAuthorId: "65cb26a5f01f97be4ea965d2",
-      lastMessageId: "65f16e7a56060bede462581f",
-      lastMessageDate: "2024-05-13T07:00:22.477Z",
-    },
+    // {
+    //   _id: "65f16e7a56060bede462581f",
+    //   conversationType: "group",
+    //   name: "Test",
+    //   links: [
+    //     {
+    //       content: "https://doctorpok.io",
+    //       authorId: "65cb26a5f01f97be4ea965d2",
+    //       date: "2024-05-14T07:00:22.477Z",
+    //     }
+    //   ],
+    //   files: [],
+    //   pinnedMessages: [],
+    //   membersId: ["65cb26a5f01f97be4ea965d2", "65f01f7e7f40b87fb7a722fc"],
+    //   createdAt: "2024-05-14T07:00:22.477Z",
+    //   updatedAt: "2024-05-14T07:00:22.477Z",
+    //   lastMessage: "Test",
+    //   lastMessageAuthorId: "65cb26a5f01f97be4ea965d2",
+    //   lastMessageId: "65f16e7a56060bede462581f",
+    //   lastMessageDate: "2024-05-14T07:00:22.477Z",
+    // },
+    // {
+    //   _id: "65f16e7a56060bedea62581f",
+    //   conversationType: "private",
+    //   name: "Test 2",
+    //   links: [
+    //     {
+    //       content: "https://doctorpok.io",
+    //       authorId: "65cb26a5f01f97be4ea965d2",
+    //       date: "2024-05-14T07:00:22.477Z",
+    //     }
+    //   ],
+    //   files: [],
+    //   pinnedMessages: [],
+    //   membersId: ["65cb26a5f01f97be4ea965d2", "65f01f7e7f40b87fb7a722fc"],
+    //   createdAt: "2024-05-14T07:00:22.477Z",
+    //   updatedAt: "2024-05-14T07:00:22.477Z",
+    //   lastMessage: "Babebibobu",
+    //   lastMessageAuthorId: "65cb26a5f01f97be4ea965d2",
+    //   lastMessageId: "65f16e7a56060bede462581f",
+    //   lastMessageDate: "2024-05-15T07:00:22.477Z",
+    // },
+    // {
+    //   _id: "65f16e7a56060bedb462581f",
+    //   conversationType: "group",
+    //   name: "Test 3",
+    //   links: [
+    //     {
+    //       content: "https://doctorpok.io",
+    //       authorId: "65cb26a5f01f97be4ea965d2",
+    //       date: "2024-05-14T07:00:22.477Z",
+    //     }
+    //   ],
+    //   files: [],
+    //   pinnedMessages: [],
+    //   membersId: ["65cb26a5f01f97be4ea965d2", "65f01f7e7f40b87fb7a722fc"],
+    //   createdAt: "2024-05-14T07:00:22.477Z",
+    //   updatedAt: "2024-05-14T07:00:22.477Z",
+    //   lastMessage: "Test 2",
+    //   lastMessageAuthorId: "65cb26a5f01f97be4ea965d2",
+    //   lastMessageId: "65f16e7a56060bede462581f",
+    //   lastMessageDate: "2024-05-13T07:00:22.477Z",
+    // },
   ])
 
-  if (!conversations.map((conversation: any) => conversation._id).includes(id) && id)
-    window.location.href = "/chats"
+  // if (!conversations.map((conversation: any) => conversation._id).includes(id) && id)
+  //   window.location.href = "/chats"
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [allMessages, setAllMessages] = useState<any>(null)
@@ -89,10 +89,28 @@ function App({ id }: { id: Readonly<string> }) {
 
   const getConversations = async () => {
     emitEvent("getConversations", { token }, (data: any) => {
-      const conversations = data.data.map((conversation: any) => {
+      console.log(data)
+      const conversations = data.channel.map((conversation: any) => {
         return {
-          ...conversation,
-          lastMessage: conversation.lastMessage,
+            _id: conversation._id,
+            conversationType: conversation.type,
+            name: conversation.name,
+            links: [
+              {
+                content: "https://doctorpok.io",
+                authorId: "65cb26a5f01f97be4ea965d2",
+                date: "2024-05-14T07:00:22.477Z",
+              }
+            ],
+            files: [],
+            pinnedMessages: [],
+            membersId: conversation.users,
+            createdAt: conversation.time,
+            updatedAt: conversation.time,
+            lastMessage: conversation.lastMessage,
+            lastMessageAuthorId: conversation.lastMessageAuthorId,
+            lastMessageId: conversation.lastMessageId,
+            lastMessageDate: conversation.lastMessageDate,
         }
       })
       setConversations(conversations)

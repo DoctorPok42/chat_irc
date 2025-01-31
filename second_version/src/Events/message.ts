@@ -16,10 +16,10 @@ const message = async (data: any, callback: any, socket : Socket ) => {
             callback({ success: false, message: 'Channel does not exist' });
             return;
         }
-        const newMessage = new Message({ channel: channel, sender: decoded.id, text: message, timestamp: new Date() });
+        const newMessage = new Message({ channel: channel, sender: decoded.id, text: data.content, timestamp: new Date() });
         await newMessage.save();
         callback({ success: true, message: 'Message sent' });
-        socket.broadcast.to(channel.name).emit('message', { status: 'success', conversationId, id: newMessage._id, sender: decoded.username, date: newMessage.timestamp, content: newMessage.text});
+        socket.emit('message', { text: content, sender: user?.username, timestamp: new Date(), conversationId: conversationId });
     } catch (error) {
         console.error(error);
     }

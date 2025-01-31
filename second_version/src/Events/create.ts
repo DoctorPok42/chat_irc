@@ -10,7 +10,7 @@ const create = async ( data: any, callback: any) => {
             callback({ success: false, message: 'Channel already exists' });
             return;
         }
-        const newChannel = new Channel({ name: channel, users: [] });
+        const newChannel = new Channel({ name: channel, users: [], time: new Date(), type: 'group' });
         await newChannel.save();
         callback({ success: true, message: 'Channel created' });
     } catch (error) {

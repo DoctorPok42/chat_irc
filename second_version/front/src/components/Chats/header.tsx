@@ -31,7 +31,7 @@ const HeaderChats = ({
 
   return (
     <div className={styles.header} onContextMenu={(e) => e.preventDefault()}>
-      <img src={`https://api.dicebear.com/8.x/avataaars/svg?seed=${conversationName.toLowerCase()}&radius=50&backgroundColor=65c9ff,b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf&randomizeIds=true`} alt="ConversationCardIcon" width={40} height={40} />
+      {/* <img src={`https://api.dicebear.com/8.x/avataaars/svg?seed=${conversationName.toLowerCase()}&radius=50&backgroundColor=65c9ff,b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf&randomizeIds=true`} alt="ConversationCardIcon" width={40} height={40} /> */}
       <div className={styles.title}>
         {isEdit ? (
           <input

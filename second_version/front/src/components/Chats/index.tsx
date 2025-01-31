@@ -128,7 +128,7 @@ const Chats = ({
     } else {
       const conversationIndex = conversations.findIndex(e => e._id === data.conversationsId)
       const newConversations = [...conversations]
-      newConversations[conversationIndex].unreadMessages++
+      // newConversations[conversationIndex].unreadMessages++
       setConversation(newConversations)
     }
   })
