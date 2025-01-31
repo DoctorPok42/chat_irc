@@ -122,13 +122,14 @@ const Chats = ({
   }
 
   socket.on("message", (data: any) => {
+    console.log(data)
     if (data.conversationsId === id) {
       setAllMessages([...allMessages, data])
       updateMessage([...allMessages, data])
     } else {
       const conversationIndex = conversations.findIndex(e => e._id === data.conversationsId)
       const newConversations = [...conversations]
-      newConversations[conversationIndex].unreadMessages++
+      // newConversations[conversationIndex].unreadMessages++
       setConversation(newConversations)
     }
   })

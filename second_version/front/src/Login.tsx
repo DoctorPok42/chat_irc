@@ -12,17 +12,18 @@ export default function Login() {
   const token = cookies.get("token");
 
   useEffect(() => {
-    if (token) window.location.href = "/chats";
-  }, [token]);
-
-  useEffect(() => {
       if (username.length >= 3 && password.length >= 6) setIsValide(true);
       else setIsValide(false);
   }, [loginType, username, password]);
 
   const handleSubmit = async () => {
     emitEvent(loginType === "signin" ? "login" : "register", { username, password }, (data: any) => {
-      setIsValide(false);
+      if (data.success){
+        cookies.set("token", data.token, { path: "/" });
+        window.location.href = "/chats";
+      }else{
+        alert(data.message);
+      }
     });
   };
 

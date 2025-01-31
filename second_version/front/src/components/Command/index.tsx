@@ -41,7 +41,7 @@ const Command = ({
       description: 'Join a channel with the provided name',
     },
     {
-      name: '/quit <name>',
+      name: '/leave <name>',
       description: 'Quit a channel with the provided name',
     },
     {
