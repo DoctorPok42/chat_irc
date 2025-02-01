@@ -2,8 +2,6 @@ import User from '../models/user';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = 'secret';
-
 const login = async (data : any, callback: any) => {
     const { username, password } = data;
     console.log(`login attempt for ${username}`);
@@ -18,7 +16,7 @@ const login = async (data : any, callback: any) => {
             callback({success: false, message: 'Invalid password'});
             return;
         }
-        const token = jwt.sign({id: user._id, username: user.username}, JWT_SECRET, {expiresIn: '24h'});
+        const token = jwt.sign({id: user._id, username: user.username}, process.env.JWT_SECRET as string, {expiresIn: '24h'});
         callback({success: true, message: 'User logged in', token});
     }catch (error){
         console.error(error);

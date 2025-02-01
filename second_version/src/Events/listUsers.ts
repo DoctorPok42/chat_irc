@@ -1,13 +1,19 @@
-import User from '../models/user';
+import User from "../models/user";
 
-const list = async ( Data: any, callback: any) => {
-    const { channel } = Data;
-    try {
-        const users = await User.find({channels: channel});
-        callback(users.map((user) => user.username));
-    } catch (error) {
-        console.error(error);
-    }
-}
+const list = async (data: any, callback: any) => {
+  const { args } = data;
+  try {
+    const users = await User.find({
+      username: { $regex: args, $options: "i" },
+    });
+    callback({
+      status: "success",
+      message: "All users.",
+      data: users,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export default list;
