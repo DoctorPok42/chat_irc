@@ -12,7 +12,7 @@ export default function Login() {
   const token = cookies.get("token");
 
   useEffect(() => {
-      if (username.length >= 3 && password.length >= 6) setIsValide(true);
+      if (username.length >= 3 && password.length >= 3) setIsValide(true);
       else setIsValide(false);
   }, [loginType, username, password]);
 
