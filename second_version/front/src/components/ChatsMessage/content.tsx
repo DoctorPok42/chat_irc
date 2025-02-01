@@ -4,8 +4,8 @@ import styles from './style.module.scss';
 
 interface ContentMessageProps {
   message: {
-    content: string
-    authorId: string
+    text: string
+    sender: string
     options?: {
       isLink: boolean
     }
@@ -23,18 +23,18 @@ const ContentMessage = ({
     <div className={styles.content}>
       {
         message.options?.isLink ?
-          message.content.split(" ").map((e, index) => {
+          message.text.split(" ").map((e, index) => {
             const link = returnJustLink(e);
             return (
               <span key={e + index }>
                 {link.link ? <>{" "}<a href={link.link} style={{
-                  color: message.authorId !== userId ? "#6b8afd" : "var(--dark-blue)",
+                  color: message.sender !== userId ? "#6b8afd" : "var(--dark-blue)",
                 }} target="_blank" rel="noreferrer">{link.link}</a>{" "}</> : link.text}
               </span>
             )
           })
         :
-          message.content
+          message.text
       }
     </div>
   );

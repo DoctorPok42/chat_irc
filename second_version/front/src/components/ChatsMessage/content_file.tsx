@@ -6,8 +6,8 @@ import styles from './style.module.scss';
 
 interface ContentFileMessageProps {
   message: {
-    content: string
-    authorId: string
+    text: string
+    sender: string
     options?: {
       isLink: boolean
       isFile: boolean
