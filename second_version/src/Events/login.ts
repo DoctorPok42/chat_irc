@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 const login = async (data : any, callback: any) => {
     const { username, password } = data;
-    console.log(`login attempt for ${username}`);
+    console.log(process.env.JWT_SECRET);
     try{
         const user = await User.findOne({username});
         if (!user){

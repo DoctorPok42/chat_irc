@@ -22,7 +22,6 @@ const join = async (data: any, callback: any) => {
     )) as any;
     if (!Chan)
       return callback({ success: false, message: "Channel does not exist" });
-
     console.log(`${decoded.username} joined channel ${channel}`);
     if (user != null) {
       user.channels.push(Chan._id);
