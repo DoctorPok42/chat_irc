@@ -1,5 +1,5 @@
 import http from "http";
-import { Server, Socket } from "socket.io";
+import { Server } from "socket.io";
 import connectDB from "./db";
 import re from "./Events/register";
 import lo from "./Events/login";
@@ -11,7 +11,6 @@ import li from "./Events/listUsers";
 import de from "./Events/delete";
 import cr from "./Events/create";
 import le from "./Events/leave";
-import veto from "./Events/verifyToken";
 import gech from "./Events/getChannel";
 import getAllMess from "./Events/getAllMessages";
 import getMess from "./Events/getMessages";
@@ -44,7 +43,6 @@ const events = {
   delete: de,
   create: cr,
   quit: le,
-  verifyToken: veto,
   getConversations: gech,
   getAllMessages: getAllMess,
   getMessages: getMess,

@@ -5,7 +5,8 @@ import Channel from "../models/channels";
 import User from "../models/user";
 
 const message = async (data: any, callback: any, socket: Socket) => {
-  const { token, conversationId, content, files } = data;
+  const token = data.token;
+  const conversationId = data.conversationId;
   const decoded = jwt.verify(
     token,
     process.env.JWT_SECRET as string

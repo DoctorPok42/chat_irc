@@ -9,7 +9,6 @@ export default function Login() {
   const [loginType, setLoginType] = useState<"signin" | "signup">("signin");
 
   const cookies = new Cookies();
-  const token = cookies.get("token");
 
   useEffect(() => {
       if (username.length >= 3 && password.length >= 3) setIsValide(true);

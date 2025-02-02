@@ -100,22 +100,6 @@ const Chats = ({
     }
   }, [isSearchOpen, isInfoOpen, id, conversations])
 
-  const getMessages = async (nbMessages?: boolean) => {
-    if (!id) return
-    emitEvent("getMessages", { token, conversationId: id, messageLoaded: nbMessages ? 0 : messageLoaded }, (data: any) => {
-      setAllMessages(data.data)
-      updateMessage()
-      setMessageLoaded(
-        nbMessages ? 10 : messageLoaded + 10
-      )
-      setConversation(conversations.map(e => {
-        if (e._id === id) {
-          e.unreadMessages = 0
-        }
-        return e
-      }))
-    })
-  }
 
   socket.on("message", (data: any) => {
     if (data.conversationsId === id) {
@@ -123,7 +107,6 @@ const Chats = ({
       setAllMessages([...allMessages, data])
       updateMessage([...allMessages, data])
     } else {
-      const conversationIndex = conversations.findIndex(e => e._id === data.conversationsId)
       const newConversations = [...conversations]
       setConversation(newConversations)
     }

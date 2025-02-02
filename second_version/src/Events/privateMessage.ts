@@ -18,7 +18,7 @@ const privateMessage = async (data: any, callback: any, socket: Socket) => {
     callback({ success: false, message: "User does not exist" });
     return;
   }
-  var chan = await Channel.findOne({
+  let chan = await Channel.findOne({
     users: { $all: [decoded.id, receiver.id] },
     type: "private",
   });

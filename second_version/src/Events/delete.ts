@@ -1,4 +1,3 @@
-import exp from 'constants';
 import Channel from '../models/channels';
 import User from '../models/user';
 

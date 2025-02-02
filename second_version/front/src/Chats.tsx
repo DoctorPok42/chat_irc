@@ -9,9 +9,6 @@ function App({ id }: { id: Readonly<string> }) {
   const [isInfoOpen, setIsInfoOpen] = useState<boolean>(false)
   const [conversations, setConversations] = useState<any>([])
 
-  // if (!conversations.map((conversation: any) => conversation._id).includes(id) && id)
-  //   window.location.href = "/chats"
-
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [allMessages, setAllMessages] = useState<any>(null)
   const [firstTime, setFirstTime] = useState<boolean>(true)
