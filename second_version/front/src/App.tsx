@@ -2,11 +2,23 @@ import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import Login from './Login';
 import Chat from './Chats';
 import "./styles/globals.scss"
+import Cookies from "universal-cookie";
+import emitEvent from "./tools/webSocketHandler";
 
 const Chats = () => {
   const { id } = useParams();
   return id ? <Chat id={id} /> : <Chat id='' />;
 }
+
+const cookies = new Cookies();
+const token = cookies.get("token");
+emitEvent("verifyToken", { token }, (data: any) => {
+    if (data.success) {
+      window.location.href = "/chats";
+    }else{
+      cookies.remove("token", { path: "/" });
+    }
+  });
 
 const App = () => {
   return (

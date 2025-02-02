@@ -41,6 +41,3 @@ next-env.d.ts
 
 # data
 data/
-
-# test
-test/

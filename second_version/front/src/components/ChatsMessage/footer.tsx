@@ -10,8 +10,8 @@ interface FooterMessageProps {
       value: string
       usersId: string[]
     }[]
-    authorId: string
-    date: Date
+    sender: string
+    timestamp: Date
   }
   handleAddReaction: (reaction: string) => void
   userId: string
@@ -41,10 +41,10 @@ const FooterMessage = ({
           ))}
       </div>
 
-      <div className={styles.date} style={{
-        color: message.authorId !== userId ? "var(--white-dark)" : "#dadada",
+      <div className={styles.timestamp} style={{
+        color: message.sender !== userId ? "var(--white-dark)" : "#dadada",
       }}>
-        {formatDate(new Date(message.date))}
+        {formatDate(new Date(message.timestamp))}
       </div>
     </div>
   );

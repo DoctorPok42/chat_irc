@@ -7,74 +7,7 @@ import emitEvent from "./tools/webSocketHandler";
 function App({ id }: { id: Readonly<string> }) {
   const [command, setCommand] = useState<boolean>(false);
   const [isInfoOpen, setIsInfoOpen] = useState<boolean>(false)
-  const [conversations, setConversations] = useState<any>([
-    {
-      _id: "65f16e7a56060bede462581f",
-      conversationType: "group",
-      name: "Test",
-      links: [
-        {
-          content: "https://doctorpok.io",
-          authorId: "65cb26a5f01f97be4ea965d2",
-          date: "2024-05-14T07:00:22.477Z",
-        }
-      ],
-      files: [],
-      pinnedMessages: [],
-      membersId: ["65cb26a5f01f97be4ea965d2", "65f01f7e7f40b87fb7a722fc"],
-      createdAt: "2024-05-14T07:00:22.477Z",
-      updatedAt: "2024-05-14T07:00:22.477Z",
-      lastMessage: "Test",
-      lastMessageAuthorId: "65cb26a5f01f97be4ea965d2",
-      lastMessageId: "65f16e7a56060bede462581f",
-      lastMessageDate: "2024-05-14T07:00:22.477Z",
-    },
-    {
-      _id: "65f16e7a56060bedea62581f",
-      conversationType: "private",
-      name: "Test 2",
-      links: [
-        {
-          content: "https://doctorpok.io",
-          authorId: "65cb26a5f01f97be4ea965d2",
-          date: "2024-05-14T07:00:22.477Z",
-        }
-      ],
-      files: [],
-      pinnedMessages: [],
-      membersId: ["65cb26a5f01f97be4ea965d2", "65f01f7e7f40b87fb7a722fc"],
-      createdAt: "2024-05-14T07:00:22.477Z",
-      updatedAt: "2024-05-14T07:00:22.477Z",
-      lastMessage: "Babebibobu",
-      lastMessageAuthorId: "65cb26a5f01f97be4ea965d2",
-      lastMessageId: "65f16e7a56060bede462581f",
-      lastMessageDate: "2024-05-15T07:00:22.477Z",
-    },
-    {
-      _id: "65f16e7a56060bedb462581f",
-      conversationType: "group",
-      name: "Test 3",
-      links: [
-        {
-          content: "https://doctorpok.io",
-          authorId: "65cb26a5f01f97be4ea965d2",
-          date: "2024-05-14T07:00:22.477Z",
-        }
-      ],
-      files: [],
-      pinnedMessages: [],
-      membersId: ["65cb26a5f01f97be4ea965d2", "65f01f7e7f40b87fb7a722fc"],
-      createdAt: "2024-05-14T07:00:22.477Z",
-      updatedAt: "2024-05-14T07:00:22.477Z",
-      lastMessage: "Test 2",
-      lastMessageAuthorId: "65cb26a5f01f97be4ea965d2",
-      lastMessageId: "65f16e7a56060bede462581f",
-      lastMessageDate: "2024-05-13T07:00:22.477Z",
-    },
-  ])
-
-  if (!conversations.map((conversation: any) => conversation._id).includes(id) && id)
-    window.location.href = "/chats"
+  const [conversations, setConversations] = useState<any>([])
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [allMessages, setAllMessages] = useState<any>(null)
@@ -86,21 +19,41 @@ function App({ id }: { id: Readonly<string> }) {
   const mainRef = useRef<HTMLDivElement>(null)
 
   const { token, phone, userId } = getToken(new Cookies());
+  if (!token) window.location.href = "/login";
 
   const getConversations = async () => {
     emitEvent("getConversations", { token }, (data: any) => {
-      const conversations = data.data.map((conversation: any) => {
+      const conversations = data.channel.map((conversation: any) => {
         return {
-          ...conversation,
-          lastMessage: conversation.lastMessage,
+            _id: conversation._id,
+            conversationType: conversation.type,
+            name: conversation.name,
+            links: [],
+            files: [],
+            pinnedMessages: [],
+            membersId: conversation.users,
+            createdAt: conversation.time,
+            updatedAt: conversation.time,
+            lastMessage: conversation.lastMessage,
+            lastMessageAuthorId: conversation.lastMessageAuthorId,
+            lastMessageId: conversation.lastMessageId,
+            lastMessageDate: conversation.lastMessageDate,
         }
       })
       setConversations(conversations)
+
+      if (id) {
+        const conversation = conversations.find((conversation: any) => conversation._id === id)
+        if (!conversation)
+          window.location.href = "/chats"
+
+      }
     })
   }
 
   const getAllMessages = async () => emitEvent("getAllMessages", { token }, async (data: any) => {
-    if (data.messages === "All messages sent.") setAllMessages(data.data)
+    if (data.messages === "All messages sent.")
+      setAllMessages(data.data)
   })
 
   useEffect(() => {
@@ -134,11 +87,12 @@ function App({ id }: { id: Readonly<string> }) {
 
   const handleAction = (action: string) => {
     setStatus("")
-    emitEvent(action.split(" ")[0].split("/")[1], { token , args: action.split(" ").slice(1).toString().trim(), id }, (data: any, error: any) => {
+    emitEvent(action.split(" ")[0].split("/")[1], { token , args: action.split(" ").slice(1).toString().trim() }, (data: any, error: any) => {
       if (error) {
         setStatus(error)
         setShowList([])
       } else {
+        console.log(data)
         getConversations()
         getAllMessages()
         setStatus("Success")

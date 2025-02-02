@@ -57,7 +57,6 @@ const Chats = ({
 }: ChatsProps) => {
   const [allMessages, setAllMessages] = useState<any[]>(messages)
 
-  const [messageLoaded, setMessageLoaded] = useState<number>(0)
   const [userTyping, setUserTyping] = useState<string>("")
   const [contextMenu, setContextMenu] = useState(initialContextMenu)
   const [showContact, setShowContact] = useState<boolean>(true)
@@ -77,10 +76,6 @@ const Chats = ({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey) {
         switch (e.key) {
-          case "b":
-            e.preventDefault();
-            setIsInfoOpen && setIsInfoOpen(!isInfoOpen);
-            break;
           case 'ArrowUp':
             e.preventDefault();
             if (!(conversations[conversations.findIndex((e: any) => e._id === id) - 1])) return
@@ -104,31 +99,14 @@ const Chats = ({
     }
   }, [isSearchOpen, isInfoOpen, id, conversations])
 
-  const getMessages = async (nbMessages?: boolean) => {
-    if (!id) return
-    emitEvent("getMessages", { token, conversationId: id, messageLoaded: nbMessages ? 0 : messageLoaded }, (data: any) => {
-      setAllMessages(data.data)
-      updateMessage()
-      setMessageLoaded(
-        nbMessages ? 10 : messageLoaded + 10
-      )
-      setConversation(conversations.map(e => {
-        if (e._id === id) {
-          e.unreadMessages = 0
-        }
-        return e
-      }))
-    })
-  }
 
   socket.on("message", (data: any) => {
     if (data.conversationsId === id) {
+      if (allMessages.findIndex(e => e._id === data._id) !== -1) return
       setAllMessages([...allMessages, data])
       updateMessage([...allMessages, data])
     } else {
-      const conversationIndex = conversations.findIndex(e => e._id === data.conversationsId)
       const newConversations = [...conversations]
-      newConversations[conversationIndex].unreadMessages++
       setConversation(newConversations)
     }
   })
@@ -178,8 +156,6 @@ const Chats = ({
   const onSend = (message: string) => {
     message = message.trim()
     if (!message && !files.length) return
-    const tempId = Math.random().toString(36).substring(7)
-    setAllMessages([...allMessages, { content: message, authorId: userId, img: phone, date: new Date().toISOString(), _id: `temp-${tempId}`, files, isTemp: true }])
 
     // Send files if there are some
     if (files.length > 0) {
@@ -187,14 +163,7 @@ const Chats = ({
     } else {
       const isLink = message.match(/(https?:\/\/[^\s]+)/g);
       emitEvent("sendMessage", { token, conversationId: id, content: message, files: null, isLink }, (data: any) => {
-        setAllMessages([...allMessages, {
-          ...data.data,
-          content: message,
-        }])
-        updateMessage([...allMessages, {
-          ...data.data,
-          content: message,
-        }])
+
       })
     }
   }
@@ -222,13 +191,6 @@ const Chats = ({
 
   const isSameDay = (date1: Date, date2: Date) => {
     return date1.getFullYear() === date2.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate()
-  }
-
-  const handleScroll = (e: any) => {
-    const element = e.target
-    if (element.scrollTop === 0) {
-      getMessages()
-    }
   }
 
   const conversationType = conversations?.find(e => e._id === id)?.conversationType === "group"
@@ -310,14 +272,12 @@ const Chats = ({
           className={styles.Chats_content}
         >
           <HeaderChats
-            isInfoOpen={isInfoOpen}
-            setIsInfoOpen={setIsInfoOpen}
             conversationName={conversationName}
             setIsSearchOpen={setIsSearchOpen}
             setEdit={onChangeName}
           />
 
-          <div className={styles.Chats_messages} onScroll={handleScroll} onLoad={() => {
+          <div className={styles.Chats_messages} onLoad={() => {
               const element = document.querySelector(`.${styles.Chats_messages}`)
               if (element && allMessages.length === 20) {
                 element.scrollTop = element.scrollHeight
@@ -326,11 +286,11 @@ const Chats = ({
             onContextMenu={(e) => {e.preventDefault()}}
           >
             {(id && allMessages.length > 0) && allMessages.map((e: any, index: number) => {
-              if (e === null) return
-              if (allMessages[index - 1] && !isSameDay(new Date(e.date), new Date(allMessages[index - 1].date))) {
+              if (e === null) return null
+              if (allMessages[index - 1] && !isSameDay(new Date(e.timestamp), new Date(allMessages[index - 1].timestamp))) {
                 return (
                   <div key={index + "date"} className={styles.Chats_date}>
-                    <p>{formatDate(new Date(e.date), true)}</p>
+                    <p>{formatDate(new Date(e.timestamp), true)}</p>
                     <ChatsMessage
                       key={index + e._id}
                       message={e}

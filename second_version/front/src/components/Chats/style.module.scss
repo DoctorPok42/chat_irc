@@ -267,7 +267,7 @@
       .Chats_date {
         width: 100%;
         text-align: center;
-        border-top: 1px solid #2e333d;
+        border-top: 1px solid #7d7f92;
         position: relative;
         user-select: none;
         margin-top: 0.5em;
@@ -275,12 +275,13 @@
         p {
           width: fit-content;
           margin: 0 auto;
-          margin-top: -0.7em;
+          margin-top: -0.55em;
           padding: 0 0.5em;
-          color: #7d7f92;
+          border-radius: 8px;
+          color: #f7f7f7;
           font-size: 0.8em;
           font-weight: bold;
-          background-color: #202329;
+          background-color: #7d7f92;
         }
       }
     }

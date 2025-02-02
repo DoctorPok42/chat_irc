@@ -1,20 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faListDots, faSearch, faThumbTack } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './style.module.scss';
 
 interface HeaderChatsProps {
-  isInfoOpen: boolean;
-  setIsInfoOpen: (value: boolean) => void;
   conversationName: string;
   setIsSearchOpen?: (e: boolean) => void;
   setEdit: (newName: string) => void;
 }
 
 const HeaderChats = ({
-  isInfoOpen,
-  setIsInfoOpen,
   conversationName,
   setIsSearchOpen,
   setEdit,
@@ -23,15 +19,20 @@ const HeaderChats = ({
   const [newName, setNewName] = useState<string>(conversationName);
 
   const onEdit = () => {
+    if (newName === conversationName || !newName) return setIsEdit(false);
     setIsEdit(false);
     setEdit(newName);
   }
+
+  useEffect(() => {
+    setNewName(conversationName);
+  }, [conversationName]);
 
   const handleSearchMessage = () => setIsSearchOpen && setIsSearchOpen(true);
 
   return (
     <div className={styles.header} onContextMenu={(e) => e.preventDefault()}>
-      <img src={`https://api.dicebear.com/8.x/avataaars/svg?seed=${conversationName.toLowerCase()}&radius=50&backgroundColor=65c9ff,b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf&randomizeIds=true`} alt="ConversationCardIcon" width={40} height={40} />
+      {newName && <img src={`https://api.dicebear.com/8.x/avataaars/svg?seed=${newName.toLowerCase()}&radius=50&backgroundColor=65c9ff,b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf&randomizeIds=true`} alt="ConversationCardIcon" width={40} height={40} />}
       <div className={styles.title}>
         {isEdit ? (
           <input

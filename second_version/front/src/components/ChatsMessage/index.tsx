@@ -7,9 +7,9 @@ import styles from './style.module.scss';
 interface ChatsMessageProps {
   message: {
     _id: string
-    content: string
-    date: Date
-    authorId: string
+    text: string
+    timestamp: Date
+    sender: string
     img: string
     options?: {
       isLink: boolean
@@ -42,7 +42,7 @@ const ChatsMessage = ({
   handleAddReaction,
   canHaveNewMessages,
 }: ChatsMessageProps) => {
-  const isOtherMessage = allMessages[index + 1] && allMessages[index + 1].authorId === message.authorId;
+  const isOtherMessage = allMessages[index + 1] && allMessages[index + 1].sender === message.sender;
   const isShowViewed = (!message.viewedBy?.includes(userId) && allMessages[index - 1]?.viewedBy?.includes(userId));
 
   const returnJustLink = (content: string): { link: string, text: string} => {
@@ -55,7 +55,7 @@ const ChatsMessage = ({
   let imagePreview;
 
   if (message.options?.data?.type.split("/")[0] === "image") {
-    const fileBuffer = Buffer.from(message.content, "base64");
+    const fileBuffer = Buffer.from(message.text, "base64");
     const file = new File([fileBuffer], message.options.data.name, { type: message.options.data.type });
     imagePreview = URL.createObjectURL(file);
   }
@@ -70,7 +70,7 @@ const ChatsMessage = ({
         margin: "0.5em 0",
         textAlign: "center",
       }}>
-        {message.content}
+        {message.text}
       </h6>
     );
   }
@@ -85,7 +85,7 @@ const ChatsMessage = ({
     <div
       className={styles.ChatsMessage_container}
       style={{
-        justifyContent: message.authorId !== userId ? "flex-start" : "flex-end",
+        justifyContent: message.sender !== userId ? "flex-start" : "flex-end",
         marginBottom: isOtherMessage ? "0.2em" : "1em",
       }}
       onContextMenu={(e) => handleContextMenu(e)}
