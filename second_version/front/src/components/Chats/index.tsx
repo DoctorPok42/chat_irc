@@ -57,7 +57,6 @@ const Chats = ({
 }: ChatsProps) => {
   const [allMessages, setAllMessages] = useState<any[]>(messages)
 
-  const [messageLoaded, setMessageLoaded] = useState<number>(0)
   const [userTyping, setUserTyping] = useState<string>("")
   const [contextMenu, setContextMenu] = useState(initialContextMenu)
   const [showContact, setShowContact] = useState<boolean>(true)
