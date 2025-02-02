@@ -6,7 +6,8 @@ export interface IMessage extends Document {
   timestamp: Date;
   channel: string;
   conversationsId: string;
-  img: string;
+  img?: string;
+  type?: "user" | "server";
 }
 
 const MessageSchema: Schema = new Schema({
@@ -15,7 +16,8 @@ const MessageSchema: Schema = new Schema({
   timestamp: { type: Date, required: true },
   channel: { type: String, required: true },
   conversationsId: { type: String, required: true },
-  img: { type: String, required: true },
+  img: { type: String },
+  type: { type: String, enum: ["user", "server"], default: "user" },
 });
 
 export default mongoose.model<IMessage>("Message", MessageSchema);

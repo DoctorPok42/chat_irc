@@ -272,8 +272,6 @@ const Chats = ({
           className={styles.Chats_content}
         >
           <HeaderChats
-            isInfoOpen={isInfoOpen}
-            setIsInfoOpen={setIsInfoOpen}
             conversationName={conversationName}
             setIsSearchOpen={setIsSearchOpen}
             setEdit={onChangeName}

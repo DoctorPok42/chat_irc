@@ -19,6 +19,7 @@ function App({ id }: { id: Readonly<string> }) {
   const mainRef = useRef<HTMLDivElement>(null)
 
   const { token, phone, userId } = getToken(new Cookies());
+  if (!token) window.location.href = "/login";
 
   const getConversations = async () => {
     emitEvent("getConversations", { token }, (data: any) => {
@@ -40,6 +41,13 @@ function App({ id }: { id: Readonly<string> }) {
         }
       })
       setConversations(conversations)
+
+      if (id) {
+        const conversation = conversations.find((conversation: any) => conversation._id === id)
+        if (!conversation)
+          window.location.href = "/chats"
+
+      }
     })
   }
 

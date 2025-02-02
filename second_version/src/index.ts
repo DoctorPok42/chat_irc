@@ -17,6 +17,7 @@ import getMess from "./Events/getMessages";
 import priMess from "./Events/privateMessage";
 import user_connected from "./Events/user_connected";
 import listChannels from "./Events/listChannels";
+import rename from "./Events/rename";
 import { config } from "dotenv";
 
 config();
@@ -48,6 +49,7 @@ const events = {
   getMessages: getMess,
   msg: priMess,
   user_connected,
+  rename,
 };
 
 startSocket(io, events);
